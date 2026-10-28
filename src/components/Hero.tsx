@@ -24,7 +24,7 @@ export default function Hero() {
   return (
     <section className="relative mx-auto max-w-3xl px-6 py-24 md:px-8">
       <div className="flex flex-col gap-6">
-        <p className="text-xs font-mono uppercase tracking-widest text-muted flex items-center gap-2 mt-8">
+        <p className="text-xs font-mono uppercase tracking-widest text-muted flex items-center gap-2">
           <span className="inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
           {time ? `Open to new work · ${time} in Manila` : "Open to new work"}
         </p>
@@ -76,18 +76,18 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="mt-16 grid gap-3 sm:grid-cols-3">
-        <div className="text-sm text-foreground">
-          <span className="block font-medium">3+ years</span>
-          <span className="text-muted">building software</span>
+      <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 border border-border divide-y sm:divide-y-0 sm:divide-x divide-border">
+        <div className="bg-background p-6">
+          <span className="block font-medium text-foreground">3+ years</span>
+          <span className="text-muted text-sm">building software</span>
         </div>
-        <div className="text-sm text-foreground">
-          <span className="block font-medium">Web &amp; Mobile</span>
-          <span className="text-muted">front to back</span>
+        <div className="bg-background p-6">
+          <span className="block font-medium text-foreground">Web &amp; Mobile</span>
+          <span className="text-muted text-sm">front to back</span>
         </div>
-        <div className="text-sm text-foreground">
-          <span className="block font-medium">Philippines</span>
-          <span className="text-muted">working remotely or on-site</span>
+        <div className="bg-background p-6">
+          <span className="block font-medium text-foreground">Philippines</span>
+          <span className="text-muted text-sm">working remotely or on-site</span>
         </div>
       </div>
 
