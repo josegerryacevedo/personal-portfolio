@@ -18,7 +18,7 @@ export default function Navbar() {
           >
             Jose Gerry Acevedo
           </Link>
-          <div className="hidden md:flex items-center flex-wrap gap-4 text-xs font-medium uppercase tracking-wider text-muted">
+          <div className="hidden md:flex items-center flex-wrap gap-4 text-[14px] font-medium text-muted">
             {navLinks.map((item) => (
               <Link
                 key={item.href}
