@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const navLinks = [
   { href: "#projects", label: "Projects" },
@@ -13,8 +13,18 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const update = () => {
+      const h = (document.querySelector("nav") as HTMLElement | null)?.offsetHeight;
+      if (h) document.documentElement.style.setProperty("--nav-height", `${h}px`);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, [open]);
+
   return (
-    <nav className="border-b border-border bg-background">
+    <nav className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 md:px-8">
         <div className="flex items-center justify-between gap-2 py-4">
           <Link
