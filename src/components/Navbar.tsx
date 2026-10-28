@@ -16,7 +16,7 @@ export default function Navbar() {
             href="#"
             className="text-sm font-medium tracking-tight text-foreground shrink-0"
           >
-            Jose Acevedo
+            Jose Gerry Acevedo
           </Link>
           <div className="hidden md:flex items-center flex-wrap gap-4 text-xs font-medium uppercase tracking-wider text-muted">
             {navLinks.map((item) => (
