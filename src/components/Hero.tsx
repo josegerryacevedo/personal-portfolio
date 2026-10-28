@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 
 export default function Hero() {
   const [time, setTime] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const format = () =>
       new Intl.DateTimeFormat("en-US", {
         hour: "numeric",
@@ -27,7 +29,18 @@ export default function Hero() {
           {time ? `Open to new work · ${time} in Manila` : "Open to new work"}
         </p>
         <h1 className="text-4xl md:text-6xl font-medium leading-tight tracking-tight text-foreground">
-          Hi, I'm Jose!
+          Hi, I'm Jose!{" "}
+          <span
+            className="inline-block"
+            style={{
+              transform: mounted ? "scale(1)" : "scale(0)",
+              opacity: mounted ? 1 : 0,
+              transition: "transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease",
+              transformOrigin: "center",
+            }}
+          >
+            👋
+          </span>
         </h1>
         <p className="text-lg text-foreground leading-relaxed max-w-xl">
           I’m a software developer who builds thoughtful, reliable software for the web. I care about the details people feel but rarely notice.
