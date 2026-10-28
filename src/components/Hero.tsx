@@ -33,10 +33,11 @@ export default function Hero() {
           <span
             className="inline-block"
             style={{
-              transform: mounted ? "scale(1)" : "scale(0)",
               opacity: mounted ? 1 : 0,
-              transition: "transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease",
-              transformOrigin: "center",
+              animation: mounted
+                ? "pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both, wave 1s ease-in-out 0.6s infinite"
+                : "none",
+              transformOrigin: "70% 70%",
             }}
           >
             👋
