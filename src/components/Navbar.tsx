@@ -10,7 +10,7 @@ const navLinks = [
 export default function Navbar() {
   return (
     <nav className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
-      <div className="mx-auto max-w-5xl px-6 py-4">
+      <div className="mx-auto max-w-3xl px-6 py-4">
         <div className="flex items-center justify-between">
           <Link
             href="#"

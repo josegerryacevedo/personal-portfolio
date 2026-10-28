@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative mx-auto max-w-5xl px-6 py-16 md:px-8 lg:px-12 text-background">
+    <section className="relative mx-auto max-w-3xl px-6 py-20 md:px-8 text-foreground">
       <div className="grid gap-8 md:gap-12 items-center md:grid-cols-2">
         <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden rounded-xl">
           <Image
