@@ -22,7 +22,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24">
+    <section className="relative mx-auto max-w-3xl px-4 pt-16 pb-8 sm:px-6 sm:pt-20 sm:pb-10 md:px-8 md:pt-24 md:pb-12">
       <div className="flex flex-col gap-6">
         <p className="text-xs font-mono uppercase tracking-widest text-muted flex items-center gap-2">
           <span className="inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
@@ -76,7 +76,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 border border-border divide-y sm:divide-y-0 sm:divide-x divide-border">
+      <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 border border-border divide-y sm:divide-y-0 sm:divide-x divide-border">
         <div className="bg-background p-6">
           <span className="block font-medium text-foreground">3+ years</span>
           <span className="text-muted text-sm">building software</span>
@@ -91,7 +91,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <hr className="mt-16 border-t border-border" aria-hidden="true" />
+      <hr className="mt-8 border-t border-border" aria-hidden="true" />
     </section>
   );
 }

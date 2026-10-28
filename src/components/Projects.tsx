@@ -19,7 +19,7 @@
 
 export default function Projects() {
   return (
-    <section id="projects" className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 scroll-mt-20">
+    <section id="projects" className="mx-auto max-w-3xl px-4 pt-8 pb-16 sm:px-6 sm:pt-10 sm:pb-20 md:px-8 scroll-mt-20">
       <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-foreground mb-8 sm:mb-12">
         Projects
       </h2>
