@@ -8,12 +8,16 @@ export default function Hero() {
       <div className="grid gap-8 md:gap-12 items-center md:grid-cols-2">
         <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden rounded-xl">
           <Image
-            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
+            src="/profile.png"
             alt="Portrait of Jose Acevedo"
-            className="w-full h-full object-cover grayscale opacity-80"
+            className="w-full h-full object-cover"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             priority
+          />
+          <div
+            className="absolute inset-0 bg-gradient-to-t from-background/10 to-transparent"
+            aria-hidden="true"
           />
         </div>
 
@@ -21,6 +25,11 @@ export default function Hero() {
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight text-foreground">
             Jose Acevedo
           </h1>
+          <p className="text-base text-foreground leading-relaxed max-w-md">
+            I'm a full-stack engineer. I build modern web & mobile apps, and these
+            days I'm focused on generative AI.
+          </p>
+
           <p className="text-base text-muted leading-relaxed max-w-md">
             I turn rough ideas into working software.
           </p>

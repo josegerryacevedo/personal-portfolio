@@ -9,16 +9,16 @@ const navLinks = [
 
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
-      <div className="mx-auto max-w-3xl px-6 py-4">
-        <div className="flex items-center justify-between">
+    <nav className="border-b border-border bg-background">
+      <div className="mx-auto max-w-3xl px-6 py-4 md:px-8">
+        <div className="flex items-center justify-between flex-wrap gap-y-2">
           <Link
             href="#"
-            className="text-sm font-medium tracking-tight text-foreground"
+            className="text-sm font-medium tracking-tight text-foreground shrink-0"
           >
-            Jose Gerry R. Acevedo Jr.
+            Jose Acevedo
           </Link>
-          <div className="hidden md:flex items-center gap-6 text-xs font-medium uppercase tracking-wider text-muted">
+          <div className="hidden md:flex items-center flex-wrap gap-4 text-xs font-medium uppercase tracking-wider text-muted">
             {navLinks.map((item) => (
               <Link
                 key={item.href}

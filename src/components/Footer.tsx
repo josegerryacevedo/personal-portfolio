@@ -3,7 +3,7 @@
 export default function Footer() {
   return (
     <footer className="w-full py-6 mt-auto">
-      <div className="mx-auto max-w-3xl flex items-center justify-between gap-4 px-6">
+      <div className="mx-auto max-w-3xl flex items-center justify-between gap-4 px-6 md:px-8">
         <div className="flex items-center gap-2">
           <div className="bg-primary w-1 h-1"></div>
           <p className="!text-ink-40 !m-0 shrink-0 tabular-nums" aria-live="polite">
