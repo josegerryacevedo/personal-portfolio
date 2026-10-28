@@ -22,13 +22,13 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative mx-auto max-w-3xl px-6 py-24 md:px-8">
+    <section className="relative mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24">
       <div className="flex flex-col gap-6">
         <p className="text-xs font-mono uppercase tracking-widest text-muted flex items-center gap-2">
           <span className="inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
           {time ? `Open to new work · ${time} in Manila` : "Open to new work"}
         </p>
-        <h1 className="text-4xl md:text-6xl font-medium leading-tight tracking-tight text-foreground">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-medium leading-tight tracking-tight text-foreground">
           Hi, I'm Jose!{" "}
           <span
             className="inline-block"
@@ -43,10 +43,10 @@ export default function Hero() {
             👋
           </span>
         </h1>
-        <p className="text-lg text-foreground leading-relaxed max-w-xl">
+        <p className="text-base sm:text-lg text-foreground leading-relaxed max-w-xl">
           I’m a software developer who builds thoughtful, reliable software for the web. I care about the details people feel but rarely notice.
         </p>
-        <div className="mt-4 flex flex-wrap items-center gap-3 text-xs font-mono text-muted">
+        <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono text-muted">
           <a
             href="https://github.com/josegerryacevedo"
             target="_blank"
