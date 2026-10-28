@@ -19,40 +19,47 @@
 
 export default function Projects() {
   return (
-    <section id="projects" className="mx-auto max-w-3xl px-4 pt-8 pb-16 sm:px-6 sm:pt-10 sm:pb-20 md:px-8 scroll-mt-20">
-      <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-foreground mb-8 sm:mb-12">
-        Projects
-      </h2>
-      <div className="space-y-10">
-        {projects.map((p) => (
-          <article key={p.title} className="group">
-            <div className="flex flex-wrap items-baseline justify-between gap-2 mb-3">
-              <h3 className="text-lg font-medium text-foreground group-hover:text-accent transition-colors">
-                {p.title}
-              </h3>
-              <a
-                href={p.href}
-                className="text-xs font-mono text-accent hover:underline"
-              >
-                View →
-              </a>
-            </div>
-            <p className="text-sm text-muted mb-4 leading-relaxed">{p.description}</p>
-            <p className="text-[12px] font-mono uppercase tracking-wider text-muted mb-2">
-              {p.status}
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {p.tech.map((t) => (
-                <span
-                  key={t}
-                  className="rounded-sm border border-border bg-border-soft px-2 py-0.5 text-[11px] font-medium text-muted"
+    <section
+      id="projects"
+      className="mx-auto max-w-3xl px-4 pt-8 pb-16 sm:px-6 sm:pt-10 sm:pb-20 md:px-8 scroll-mt-20"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
+        <div className="md:sticky md:top-[var(--nav-height,3.5rem)] md:self-start">
+          <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-foreground">
+            Projects
+          </h2>
+        </div>
+        <div className="space-y-10">
+          {projects.map((p) => (
+            <article key={p.title} className="group">
+              <div className="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+                <h3 className="text-lg font-medium text-foreground group-hover:text-accent transition-colors">
+                  {p.title}
+                </h3>
+                <a
+                  href={p.href}
+                  className="text-xs font-mono text-accent hover:underline"
                 >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </article>
-        ))}
+                  View →
+                </a>
+              </div>
+              <p className="text-sm text-muted mb-4 leading-relaxed">{p.description}</p>
+              <p className="text-[12px] font-mono uppercase tracking-wider text-muted mb-2">
+                {p.status}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {p.tech.map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-sm border border-border bg-border-soft px-2 py-0.5 text-[11px] font-medium text-muted"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
       <hr className="section-divider mt-16" />
     </section>
