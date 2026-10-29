@@ -26,20 +26,17 @@ export default function Hero() {
       className="relative mx-auto flex w-full max-w-3xl flex-col justify-center gap-6 px-4 py-8 min-h-[calc(100dvh-var(--nav-height,3.5rem))] min-h-[calc(100svh-var(--nav-height,3.5rem))] sm:px-6 sm:py-10 md:px-8"
     >
       <div className="flex flex-col gap-6">
-        <p className="text-xs font-mono uppercase tracking-widest text-muted flex items-center gap-2">
+        <p className="text-xs font-mono uppercase tracking-widest text-muted flex items-center gap-2 animate-fade-up-12 motion-reduce:animate-none" style={{ animationDelay: "0ms" }}>
           <span className="inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
           {time ? `Open to new work · ${time} in Manila` : "Open to new work"}
         </p>
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-medium leading-tight tracking-tight text-foreground">
-          {["Hi,", "I'm", "Jose!"].map((word, i) => (
-            <span
-              key={word}
-              className="inline-block animate-blur-fade-up mr-2"
-              style={{ animationDelay: `${i * 120}ms` }}
-            >
-              {word}
-            </span>
-          ))}{" "}
+          <span
+            className="inline-block animate-fade-up-12 motion-reduce:animate-none"
+            style={{ animationDelay: "100ms" }}
+          >
+            Hi, I'm Jose!
+          </span>{" "}
           <span
             className="inline-block"
             style={{
@@ -53,15 +50,15 @@ export default function Hero() {
             👋
           </span>
         </h1>
-        <p className="text-base sm:text-lg text-foreground leading-relaxed max-w-xl">
+        <p className="text-base sm:text-lg text-foreground leading-relaxed max-w-xl animate-fade-up-12 motion-reduce:animate-none" style={{ animationDelay: "250ms" }}>
           I’m a software developer who builds thoughtful, reliable software for the web. I care about the details people feel but rarely notice.
         </p>
-        <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono text-muted">
+        <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono text-muted animate-fade-up-12 motion-reduce:animate-none" style={{ animationDelay: "350ms" }}>
           <a
             href="https://github.com/josegerryacevedo"
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-colors hover:text-foreground"
+            className="relative transition-colors hover:text-foreground after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:scale-x-0 after:bg-foreground after:transition-transform after:duration-200 after:origin-left hover:after:scale-x-100"
           >
             github
           </a>
@@ -70,7 +67,7 @@ export default function Hero() {
             href="https://linkedin.com/in/josegerryacevedo"
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-colors hover:text-foreground"
+            className="relative transition-colors hover:text-foreground after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:scale-x-0 after:bg-foreground after:transition-transform after:duration-200 after:origin-left hover:after:scale-x-100"
           >
             linkedin
           </a>
@@ -79,7 +76,7 @@ export default function Hero() {
             href="https://x.com/josegerryacevedo"
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-colors hover:text-foreground"
+            className="relative transition-colors hover:text-foreground after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:scale-x-0 after:bg-foreground after:transition-transform after:duration-200 after:origin-left hover:after:scale-x-100"
           >
             x
           </a>
@@ -87,21 +84,21 @@ export default function Hero() {
       </div>
 
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 border border-border divide-y sm:divide-y-0 sm:divide-x divide-border">
-        <div className="bg-background p-6">
+        <div className="bg-background p-6 animate-fade-up-12 motion-reduce:animate-none" style={{ animationDelay: "450ms" }}>
           <span className="block font-medium text-foreground">3+ years</span>
           <span className="text-muted text-sm">building software</span>
         </div>
-        <div className="bg-background p-6">
+        <div className="bg-background p-6 animate-fade-up-12 motion-reduce:animate-none" style={{ animationDelay: "530ms" }}>
           <span className="block font-medium text-foreground">Web &amp; Mobile</span>
           <span className="text-muted text-sm">front to back</span>
         </div>
-        <div className="bg-background p-6">
+        <div className="bg-background p-6 animate-fade-up-12 motion-reduce:animate-none" style={{ animationDelay: "610ms" }}>
           <span className="block font-medium text-foreground">Philippines</span>
           <span className="text-muted text-sm">working remotely or on-site</span>
         </div>
       </div>
 
-      <hr className="mt-4 border-t border-border" aria-hidden="true" />
+      <hr className="mt-4 border-t border-border origin-left animate-draw-line motion-reduce:animate-none" style={{ animationDelay: "750ms" }} aria-hidden="true" />
     </section>
   );
 }

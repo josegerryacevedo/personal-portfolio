@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -137,4 +137,21 @@ body {
   border-top: 1px solid var(--border); 
   margin: 0; 
 } 
-  border: none;
+ 
+@keyframes fade-up-12 {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up-12 {
+  animation: fade-up-12 0.5s ease-out both;
+}
+
+@keyframes draw-line {
+  from { opacity: 0; transform: scaleX(0); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+.animate-draw-line {
+  animation: draw-line 0.5s ease-out both;
+}
