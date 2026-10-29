@@ -1,4 +1,8 @@
-﻿const projects = [
+"use client";
+
+import { useState } from "react";
+
+const projects = [
   {
     title: "Eztrackph",
     status: "GPS fleet management platform",
@@ -18,6 +22,11 @@
 ];
 
 export default function Projects() {
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+
+  const toggle = (title: string) =>
+    setExpanded((prev) => ({ ...prev, [title]: !prev[title] }));
+
   return (
     <section
       id="projects"
@@ -43,7 +52,33 @@ export default function Projects() {
                   View →
                 </a>
               </div>
-              <p className="text-sm text-muted mb-4 leading-relaxed">{p.description}</p>
+              <div className="relative mb-4">
+                  <p
+                    className={`text-sm text-muted leading-relaxed ${
+                      expanded[p.title] ? "" : "line-clamp-2"
+                    }`}
+                  >
+                    {p.description}
+                  </p>
+                  {!expanded[p.title] && (
+                    <button
+                      type="button"
+                      onClick={() => toggle(p.title)}
+                      className="absolute bottom-1 right-0 text-xs font-mono text-accent hover:underline bg-background pl-2 transition-colors"
+                    >
+                      See more
+                    </button>
+                  )}
+                </div>
+                {expanded[p.title] && (
+                  <button
+                    type="button"
+                    onClick={() => toggle(p.title)}
+                    className="text-xs font-mono text-accent hover:underline mb-4 transition-colors"
+                  >
+                    See less
+                  </button>
+                )}
               <p className="text-[12px] font-mono uppercase tracking-wider text-muted mb-2">
                 {p.status}
               </p>
