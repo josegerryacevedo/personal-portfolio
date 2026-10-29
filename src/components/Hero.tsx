@@ -1,12 +1,15 @@
 ﻿"use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import { CYCLE, FLASH_END, JUMP_SPAN, START_DELAY } from "@/lib/hero-timing";
 import { BladeFlash } from "@/components/blade-flash";
 
 export default function Hero() {
   const [time, setTime] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const emojiRef = useRef<HTMLSpanElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
   const containerVariants = {
@@ -23,7 +26,7 @@ export default function Hero() {
     }),
   };
 
-  useEffect(() => {
+useEffect(() => {
     setMounted(true);
     const format = () =>
       new Intl.DateTimeFormat("en-US", {
@@ -38,6 +41,20 @@ export default function Hero() {
     return () => clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    const el = emojiRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setPaused(!entry.isIntersecting);
+    }, { threshold: 0 });
+    observer.observe(el);
+    const onVisibility = () => setPaused(document.hidden);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [mounted]);
 return (
     <section
       className="relative mx-auto flex w-full max-w-3xl flex-col justify-center gap-6 px-4 py-8 min-h-[calc(100dvh-var(--nav-height,3.5rem))] min-h-[calc(100svh-var(--nav-height,3.5rem))] sm:px-6 sm:py-10 md:px-8"
@@ -65,18 +82,51 @@ return (
           <BladeFlash as="span" trigger="load" delay={0.6} className="inline-block">
             Hi, I'm Jose!
           </BladeFlash>{" "}
-          <span
+          <motion.span
+            ref={emojiRef}
             className="inline-block"
             style={{
               opacity: mounted ? 1 : 0,
-              animation: mounted
-                ? "pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both, wave 1s ease-in-out 0.6s infinite"
-                : "none",
-              transformOrigin: "70% 70%",
+              transformOrigin: "bottom center",
+            }}
+            aria-hidden="true"
+            initial={{ y: 0 }}
+            animate={
+              paused
+                ? { y: 0 }
+                : {
+                    y: [0, 0, -14, 0, -4, 0, 0],
+                  }
+            }
+            transition={{
+              delay: START_DELAY,
+              duration: CYCLE,
+              ease: ["linear", "easeOut", "easeIn", "easeOut", "easeIn", "linear"],
+              times: [
+                0,
+                FLASH_END,
+                FLASH_END + JUMP_SPAN * 0.3,
+                FLASH_END + JUMP_SPAN * 0.6,
+                FLASH_END + JUMP_SPAN * 0.8,
+                FLASH_END + JUMP_SPAN,
+                1,
+              ],
+              repeat: Infinity,
+              repeatDelay: 0,
             }}
           >
-            👋
-          </span>
+            <span
+              className="inline-block"
+              style={{
+                animation: mounted
+                  ? "pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both, wave 1s ease-in-out 0.6s infinite"
+                  : "none",
+                transformOrigin: "70% 70%",
+              }}
+            >
+              👋
+            </span>
+          </motion.span>
         </motion.h1>
 
         <motion.p

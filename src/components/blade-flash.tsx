@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import React from "react";
+import { CYCLE, FLASH_END, START_DELAY } from "@/lib/hero-timing";
 
 type BladeFlashProps = {
   as?: keyof React.JSX.IntrinsicElements;
@@ -14,7 +15,7 @@ type BladeFlashProps = {
 
 export function BladeFlash({
   as = "h2",
-  delay = 0,
+  delay = START_DELAY,
   once = true,
   trigger = "view",
   className,
@@ -45,11 +46,11 @@ export function BladeFlash({
     trigger === "load"
       ? {
           initial: { backgroundPosition: "150% 0" },
-          animate: { backgroundPosition: "-50% 0" },
+          animate: { backgroundPosition: ["150% 0", "-50% 0", "-50% 0"] },
         }
       : {
           initial: { backgroundPosition: "150% 0" },
-          whileInView: { backgroundPosition: "-50% 0" },
+          whileInView: { backgroundPosition: ["150% 0", "-50% 0", "-50% 0"] },
           viewport: { once, amount: 0.6 },
         };
 
@@ -58,7 +59,14 @@ export function BladeFlash({
       className={className}
       style={style}
       {...animationProps}
-      transition={{ delay, duration: 2.5, ease: [0.4, 0, 0.2, 1], repeat: Infinity, repeatDelay: 0.5 }}
+      transition={{
+      delay,
+      duration: CYCLE,
+      ease: ["easeInOut", "linear"],
+      times: [0, FLASH_END, 1],
+      repeat: Infinity,
+      repeatDelay: 0,
+    }}
     >
       {children}
     </MotionTag>
