@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Reveal, RevealItem } from "@/components/reveal";
+import ExperienceHeader from "@/components/ExperienceHeader";
 
 export default function Experience() {
   const work = [
@@ -35,7 +36,7 @@ export default function Experience() {
     {
       degree: "Bachelor of Science in Information Technology",
       school: "Bestlink College of the Philippines",
-      date: "2017 – 2021",
+      date: "Jun 2017 – Apr 2021",
     },
   ];
 
@@ -57,16 +58,21 @@ export default function Experience() {
               <h3 className="text-base font-medium text-foreground mb-6">Work Experience</h3>
             {work.map((w) => (
               <div key={w.company} className="mb-10">
-                <div className="flex flex-wrap items-baseline gap-2 mb-2">
-                  <span className="text-sm font-medium text-foreground">{w.role}</span>
-                  <span className="text-xs text-muted">|</span>
-                  <span className="text-sm text-muted">{w.company}</span>
-                  <span className="text-xs text-muted ml-auto">{w.date}</span>
-                </div>
-                <p className="text-xs text-muted mb-3">{w.location}</p>
-                <ul className="list-disc list-inside text-sm text-muted leading-relaxed space-y-2">
+<ExperienceHeader
+                  title={w.role}
+                  company={w.company}
+                  location={w.location}
+                  startDate="Jan 2023"
+                  endDate="Present"
+                />
+                <ul className="mt-3 space-y-2 text-sm text-muted leading-relaxed">
                   {w.bullets.map((b) => (
-                    <li key={b}>{b}</li>
+                    <li
+                      key={b}
+                      className="grid grid-cols-[12px_1fr] gap-x-2 items-start min-w-0 before:mt-[0.7em] before:h-1 before:w-1 before:rounded-full before:bg-muted before:justify-self-center before:content-['']"
+                    >
+                      <span className="min-w-0 [overflow-wrap:anywhere]">{b}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -79,15 +85,21 @@ export default function Experience() {
               <h3 className="text-base font-medium text-foreground mb-6">Training</h3>
             {training.map((t) => (
               <div key={t.title} className="mb-10">
-                <div className="flex flex-wrap items-baseline gap-2 mb-2">
-                  <span className="text-sm font-medium text-foreground">{t.title}</span>
-                  <span className="text-xs text-muted">|</span>
-                  <span className="text-sm text-muted">{t.location}</span>
-                  <span className="text-xs text-muted ml-auto">{t.date}</span>
-                </div>
-                <ul className="list-disc list-inside text-sm text-muted leading-relaxed space-y-2">
+<ExperienceHeader
+                  title={t.title}
+                  company={t.location}
+                  location=""
+                  startDate="Jun 2022"
+                  endDate="Sep 2022"
+                />
+                <ul className="mt-3 space-y-2 text-sm text-muted leading-relaxed">
                   {t.bullets.map((b) => (
-                    <li key={b}>{b}</li>
+                    <li
+                      key={b}
+                      className="grid grid-cols-[12px_1fr] gap-x-2 items-start min-w-0 before:mt-[0.7em] before:h-1 before:w-1 before:rounded-full before:bg-muted before:justify-self-center before:content-['']"
+                    >
+                      <span className="min-w-0 [overflow-wrap:anywhere]">{b}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -100,12 +112,13 @@ export default function Experience() {
               <h3 className="text-base font-medium text-foreground mb-6">Education</h3>
             {education.map((e) => (
               <div key={e.school} className="mb-10">
-                <div className="flex flex-wrap items-baseline gap-2 mb-2">
-                  <span className="text-sm font-medium text-foreground">{e.degree}</span>
-                  <span className="text-xs text-muted">|</span>
-                  <span className="text-sm text-muted">{e.school}</span>
-                  <span className="text-xs text-muted ml-auto">{e.date}</span>
-                </div>
+                <ExperienceHeader
+                  title={e.degree}
+                  company={e.school}
+                  location=""
+                  startDate=""
+                  endDate={e.date}
+                />
               </div>
             ))}
           </div>
