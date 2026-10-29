@@ -62,14 +62,14 @@ export default function Skills() {
             {groups.map((g) => (
               <RevealItem key={g.label}>
                 <div className="min-w-[200px]">
-                  <h4 className="text-sm font-medium text-foreground mb-3">
+                  <h4 className="text-base font-medium text-foreground mb-3">
                     {g.label}
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {g.items.map((item) => (
                       <span
                         key={item}
-                        className="inline-block rounded-sm border border-border bg-border-soft px-2 py-0.5 text-[11px] font-medium text-muted"
+                        className="inline-block rounded-sm border border-border bg-border-soft px-2 py-0.5 text-[13px] font-medium text-muted"
                       >
                         {item}
                       </span>

@@ -67,7 +67,7 @@ export default function Projects() {
           {projects.map((p) => (
             <RevealItem key={p.title} as="article" className="group">
               <div className="flex flex-wrap items-baseline justify-between gap-2 mb-3">
-                <h3 className={`text-lg font-medium transition-colors ${p.title === "Eztrackph" ? "text-orange-700 dark:text-orange-400" : p.title === "Internal Payroll System" ? "text-blue-700 dark:text-blue-400" : "text-foreground group-hover:text-accent"}`}>
+                <h3 className="text-lg font-medium text-foreground group-hover:text-accent transition-colors">
                   {p.title}
                 </h3>
                 <a
