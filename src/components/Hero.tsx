@@ -64,20 +64,20 @@ export default function Hero() {
     >
       <div className="flex-1 flex flex-col justify-center">
         <SectionContainer className="flex flex-col gap-6">
-          <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-x-6 items-end">
+          <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] items-end">
             <motion.div
               initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.6, ease: "easeOut" }}
-              className="relative w-32 lg:w-[200px] mb-6 lg:mb-0"
+              className="relative w-24 lg:w-[160px] mb-6 lg:mb-0"
             >
               <Image
                 src="/images/black-profile.png"
                 alt="Portrait of Jose Gerry Acevedo"
-                width={715}
-                height={715}
+                width={500}
+                height={500}
                 priority
-                sizes="(min-width: 1024px) 240px, 160px"
+                sizes="(min-width: 1024px) 160px, 96px"
                 className="w-full h-auto"
               />
             </motion.div>
