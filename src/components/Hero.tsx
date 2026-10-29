@@ -1,10 +1,26 @@
 ﻿"use client";
 
 import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 
 export default function Hero() {
   const [time, setTime] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  const containerVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 12 },
+    visible: (delay: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay, duration: 0.5, ease: "easeOut" as const },
+    }),
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -21,22 +37,31 @@ export default function Hero() {
     return () => clearInterval(id);
   }, []);
 
-  return (
+return (
     <section
       className="relative mx-auto flex w-full max-w-3xl flex-col justify-center gap-6 px-4 py-8 min-h-[calc(100dvh-var(--nav-height,3.5rem))] min-h-[calc(100svh-var(--nav-height,3.5rem))] sm:px-6 sm:py-10 md:px-8"
     >
-      <div className="flex flex-col gap-6">
-        <p className="text-xs font-mono uppercase tracking-widest text-muted flex items-center gap-2 animate-fade-up-12 motion-reduce:animate-none" style={{ animationDelay: "0ms" }}>
+      <motion.div
+        className="flex flex-col gap-6"
+        variants={containerVariants}
+        initial={prefersReducedMotion ? false : "hidden"}
+        animate="visible"
+      >
+        <motion.p
+          custom={0}
+          variants={itemVariants}
+          className="text-xs font-mono uppercase tracking-widest text-muted flex items-center gap-2"
+        >
           <span className="inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
           {time ? `Open to new work · ${time} in Manila` : "Open to new work"}
-        </p>
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-medium leading-tight tracking-tight text-foreground">
-          <span
-            className="inline-block animate-fade-up-12 motion-reduce:animate-none"
-            style={{ animationDelay: "100ms" }}
-          >
-            Hi, I'm Jose!
-          </span>{" "}
+        </motion.p>
+
+        <motion.h1
+          custom={0.1}
+          variants={itemVariants}
+          className="text-3xl sm:text-4xl md:text-6xl font-medium leading-tight tracking-tight text-foreground"
+        >
+          <span className="inline-block">Hi, I'm Jose!</span>{" "}
           <span
             className="inline-block"
             style={{
@@ -49,11 +74,21 @@ export default function Hero() {
           >
             👋
           </span>
-        </h1>
-        <p className="text-base sm:text-lg text-foreground leading-relaxed max-w-xl animate-fade-up-12 motion-reduce:animate-none" style={{ animationDelay: "250ms" }}>
+        </motion.h1>
+
+        <motion.p
+          custom={0.25}
+          variants={itemVariants}
+          className="text-base sm:text-lg text-foreground leading-relaxed max-w-xl"
+        >
           I’m a software developer who builds thoughtful, reliable software for the web. I care about the details people feel but rarely notice.
-        </p>
-        <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono text-muted animate-fade-up-12 motion-reduce:animate-none" style={{ animationDelay: "350ms" }}>
+        </motion.p>
+
+        <motion.div
+          custom={0.35}
+          variants={itemVariants}
+          className="mt-4 flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono text-muted"
+        >
           <a
             href="https://github.com/josegerryacevedo"
             target="_blank"
@@ -80,25 +115,40 @@ export default function Hero() {
           >
             x
           </a>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 border border-border divide-y sm:divide-y-0 sm:divide-x divide-border">
-        <div className="bg-background p-6 animate-fade-up-12 motion-reduce:animate-none" style={{ animationDelay: "450ms" }}>
-          <span className="block font-medium text-foreground">3+ years</span>
-          <span className="text-muted text-sm">building software</span>
-        </div>
-        <div className="bg-background p-6 animate-fade-up-12 motion-reduce:animate-none" style={{ animationDelay: "530ms" }}>
-          <span className="block font-medium text-foreground">Web &amp; Mobile</span>
-          <span className="text-muted text-sm">front to back</span>
-        </div>
-        <div className="bg-background p-6 animate-fade-up-12 motion-reduce:animate-none" style={{ animationDelay: "610ms" }}>
-          <span className="block font-medium text-foreground">Philippines</span>
-          <span className="text-muted text-sm">working remotely or on-site</span>
-        </div>
-      </div>
+      <motion.div
+        className="mt-4 grid grid-cols-1 sm:grid-cols-3 border border-border divide-y sm:divide-y-0 sm:divide-x divide-border"
+        variants={containerVariants}
+        initial={prefersReducedMotion ? false : "hidden"}
+        animate="visible"
+      >
+        {[
+          { title: "3+ years", subtitle: "building software" },
+          { title: "Web & Mobile", subtitle: "front to back" },
+          { title: "Philippines", subtitle: "working remotely or on-site" },
+        ].map((cell, i) => (
+          <motion.div
+            key={cell.title}
+            custom={0.45 + i * 0.08}
+            variants={itemVariants}
+            className="bg-background p-6"
+          >
+            <span className="block font-medium text-foreground">{cell.title}</span>
+            <span className="text-muted text-sm">{cell.subtitle}</span>
+          </motion.div>
+        ))}
+      </motion.div>
 
-      <hr className="mt-4 border-t border-border origin-left animate-draw-line motion-reduce:animate-none" style={{ animationDelay: "750ms" }} aria-hidden="true" />
+      <motion.hr
+        className="mt-4 border-t border-border"
+        initial={prefersReducedMotion ? false : { opacity: 0, scaleX: 0 }}
+        animate={{ opacity: 1, scaleX: 1 }}
+        transition={{ delay: 0.75, duration: 0.5, ease: "easeOut" }}
+        style={{ transformOrigin: "left" }}
+        aria-hidden="true"
+      />
     </section>
   );
 }
