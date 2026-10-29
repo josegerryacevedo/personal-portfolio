@@ -47,7 +47,7 @@ export default function Experience() {
       className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 scroll-mt-20"
     >
       <Reveal className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
-        <div className="md:sticky md:top-[var(--nav-height,3.5rem)] md:self-start">
+        <div className="md:sticky md:top-[calc(var(--nav-height,3.5rem)+1rem)] md:self-start">
           <RevealItem as="h2" className="text-xl sm:text-2xl font-medium tracking-tight text-foreground">
             Experience
           </RevealItem>
