@@ -13,7 +13,7 @@ import {
 const navItems = [
   { id: "projects", label: "Projects", icon: FolderGit2, href: "#projects" },
   { id: "experience", label: "Experience", icon: Briefcase, href: "#experience" },
-  { id: "skills", label: "Skills", icon: Wrench, href: "#skills" },
+  { id: "skills", label: "Stacks", icon: Wrench, href: "#skills" },
   { id: "email", label: "Email", icon: Mail, href: "mailto:josegerryacevedojr@gmail.com" },
   { id: "resume", label: "Download resume", icon: FileText, href: "/resume.pdf" },
 ] as const;
