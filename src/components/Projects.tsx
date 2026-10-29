@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Reveal, RevealItem } from "@/components/reveal";
 import { motion } from "motion/react";
 
 const projects = [
@@ -24,8 +25,6 @@ const projects = [
 
 export default function Projects() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
-  const [inView, setInView] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
   const paraRefs = useRef<Record<string, HTMLParagraphElement | null>>({});
   const visibleWordCounts = useRef<Record<string, number>>({});
 
@@ -49,25 +48,6 @@ export default function Projects() {
     });
   }, []);
 
-useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setInView(true);
-      return;
-    }
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   const toggle = (title: string) =>
     setExpanded((prev) => ({ ...prev, [title]: !prev[title] }));
@@ -75,27 +55,17 @@ useEffect(() => {
   return (
     <section
       id="projects"
-      ref={sectionRef}
       className="mx-auto max-w-3xl px-4 pt-8 pb-16 sm:px-6 sm:pt-10 sm:pb-20 md:px-8 scroll-mt-20"
     >
-      <div className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
+      <Reveal className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
         <div className="md:sticky md:top-[var(--nav-height,3.5rem)] md:self-start">
-          <h2
-            className={`text-xl sm:text-2xl font-medium tracking-tight text-foreground ${
-              inView ? "animate-fade-up-12" : "opacity-0 translate-y-3"
-            }`}
-            style={inView ? { animationDelay: "0ms" } : undefined}
-          >
+          <RevealItem as="h2" className="text-xl sm:text-2xl font-medium tracking-tight text-foreground">
             Projects
-          </h2>
+          </RevealItem>
         </div>
         <div className="space-y-10">
-          {projects.map((p, i) => (
-            <article
-              key={p.title}
-              className={`group ${inView ? "animate-fade-up-12" : "opacity-0 translate-y-3"}`}
-              style={inView ? { animationDelay: `${150 + i * 150}ms` } : undefined}
-            >
+          {projects.map((p) => (
+            <RevealItem key={p.title} as="article" className="group">
               <div className="flex flex-wrap items-baseline justify-between gap-2 mb-3">
                 <h3 className={`text-lg font-medium transition-colors ${p.title === "Eztrackph" ? "text-orange-700 dark:text-orange-400" : p.title === "Internal Payroll System" ? "text-blue-700 dark:text-blue-400" : "text-foreground group-hover:text-accent"}`}>
                   {p.title}
@@ -171,11 +141,13 @@ useEffect(() => {
                   </span>
                 ))}
               </div>
-            </article>
+            </RevealItem>
           ))}
         </div>
-      </div>
-      <hr className="section-divider mt-16" />
+</Reveal>
+      <RevealItem>
+        <hr className="section-divider mt-16" />
+      </RevealItem>
     </section>
   );
 }

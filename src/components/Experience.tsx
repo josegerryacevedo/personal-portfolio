@@ -1,4 +1,9 @@
-﻿export default function Experience() {
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { Reveal, RevealItem } from "@/components/reveal";
+
+export default function Experience() {
   const work = [
     {
       role: "Software Developer",
@@ -35,64 +40,81 @@
   ];
 
   return (
-    <section id="experience" className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 scroll-mt-20">
-      <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-foreground mb-8 sm:mb-12">
-        Experience
-      </h2>
-
-      <div className="mb-16">
-        <h3 className="text-base font-medium text-foreground mb-6">Work Experience</h3>
-        {work.map((w) => (
-          <div key={w.company} className="mb-10">
-            <div className="flex flex-wrap items-baseline gap-2 mb-2">
-              <span className="text-sm font-medium text-foreground">{w.role}</span>
-              <span className="text-xs text-muted">|</span>
-              <span className="text-sm text-muted">{w.company}</span>
-              <span className="text-xs text-muted ml-auto">{w.date}</span>
-            </div>
-            <p className="text-xs text-muted mb-3">{w.location}</p>
-            <ul className="list-disc list-inside text-sm text-foreground leading-relaxed space-y-2">
-              {w.bullets.map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
+    <section
+      id="experience"
+     
+      className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 scroll-mt-20"
+    >
+      <Reveal className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
+        <div className="md:sticky md:top-[var(--nav-height,3.5rem)] md:self-start">
+          <RevealItem as="h2" className="text-xl sm:text-2xl font-medium tracking-tight text-foreground">
+            Experience
+          </RevealItem>
+        </div>
+        <div className="space-y-10">
+          <RevealItem>
+            <div className="mb-16">
+              <h3 className="text-base font-medium text-foreground mb-6">Work Experience</h3>
+            {work.map((w) => (
+              <div key={w.company} className="mb-10">
+                <div className="flex flex-wrap items-baseline gap-2 mb-2">
+                  <span className="text-sm font-medium text-foreground">{w.role}</span>
+                  <span className="text-xs text-muted">|</span>
+                  <span className="text-sm text-muted">{w.company}</span>
+                  <span className="text-xs text-muted ml-auto">{w.date}</span>
+                </div>
+                <p className="text-xs text-muted mb-3">{w.location}</p>
+                <ul className="list-disc list-inside text-sm text-foreground leading-relaxed space-y-2">
+                  {w.bullets.map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+          </RevealItem>
 
-      <div className="mb-16">
-        <h3 className="text-base font-medium text-foreground mb-6">Training</h3>
-        {training.map((t) => (
-          <div key={t.title} className="mb-10">
-            <div className="flex flex-wrap items-baseline gap-2 mb-2">
-              <span className="text-sm font-medium text-foreground">{t.title}</span>
-              <span className="text-xs text-muted">|</span>
-              <span className="text-sm text-muted">{t.location}</span>
-              <span className="text-xs text-muted ml-auto">{t.date}</span>
-            </div>
-            <ul className="list-disc list-inside text-sm text-foreground leading-relaxed space-y-2">
-              {t.bullets.map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
+          <RevealItem>
+            <div className="mb-16">
+              <h3 className="text-base font-medium text-foreground mb-6">Training</h3>
+            {training.map((t) => (
+              <div key={t.title} className="mb-10">
+                <div className="flex flex-wrap items-baseline gap-2 mb-2">
+                  <span className="text-sm font-medium text-foreground">{t.title}</span>
+                  <span className="text-xs text-muted">|</span>
+                  <span className="text-sm text-muted">{t.location}</span>
+                  <span className="text-xs text-muted ml-auto">{t.date}</span>
+                </div>
+                <ul className="list-disc list-inside text-sm text-foreground leading-relaxed space-y-2">
+                  {t.bullets.map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+          </RevealItem>
 
-      <div>
-        <h3 className="text-base font-medium text-foreground mb-6">Education</h3>
-        {education.map((e) => (
-          <div key={e.school} className="mb-10">
-            <div className="flex flex-wrap items-baseline gap-2 mb-2">
-              <span className="text-sm font-medium text-foreground">{e.degree}</span>
-              <span className="text-xs text-muted">|</span>
-              <span className="text-sm text-muted">{e.school}</span>
-              <span className="text-xs text-muted ml-auto">{e.date}</span>
-            </div>
+          <RevealItem>
+            <div>
+              <h3 className="text-base font-medium text-foreground mb-6">Education</h3>
+            {education.map((e) => (
+              <div key={e.school} className="mb-10">
+                <div className="flex flex-wrap items-baseline gap-2 mb-2">
+                  <span className="text-sm font-medium text-foreground">{e.degree}</span>
+                  <span className="text-xs text-muted">|</span>
+                  <span className="text-sm text-muted">{e.school}</span>
+                  <span className="text-xs text-muted ml-auto">{e.date}</span>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <hr className="section-divider mt-16" />
+          </RevealItem>
+        </div>
+      </Reveal>
+      <RevealItem>
+        <hr className="section-divider mt-16" />
+      </RevealItem>
     </section>
   );
 }
