@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const projects = [
   {
@@ -23,6 +23,28 @@ const projects = [
 
 export default function Projects() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const paraRefs = useRef<Record<string, HTMLParagraphElement | null>>({});
+  const visibleWordCounts = useRef<Record<string, number>>({});
+
+  useEffect(() => {
+    projects.forEach((p) => {
+      const para = paraRefs.current[p.title];
+      if (!para) return;
+      const spans = Array.from(para.querySelectorAll("span"));
+      const lineHeight = parseFloat(getComputedStyle(para).lineHeight) || 22.75;
+      const collapsedHeight = lineHeight * 2;
+      let count = 0;
+      for (const span of spans) {
+        const el = span as HTMLElement;
+        if (el.offsetTop + el.offsetHeight <= collapsedHeight + 1) {
+          count++;
+        } else {
+          break;
+        }
+      }
+      visibleWordCounts.current[p.title] = count;
+    });
+  }, []);
 
   const toggle = (title: string) =>
     setExpanded((prev) => ({ ...prev, [title]: !prev[title] }));
@@ -52,19 +74,32 @@ export default function Projects() {
                   View →
                 </a>
               </div>
-              <div className="relative mb-4">
+              <div className="mb-4">
                   <p
-                    className={`text-sm text-muted leading-relaxed ${
-                      expanded[p.title] ? "" : "line-clamp-2"
+                    ref={(el) => { paraRefs.current[p.title] = el; }}
+                    className={`text-sm text-muted leading-relaxed transition-[max-height] duration-700 ease-in-out overflow-hidden ${
+                      expanded[p.title] ? "max-h-[6rem]" : "max-h-[calc(2*1.625*0.875rem)]"
                     }`}
                   >
-                    {p.description}
+                    {p.description.split(" ").map((word, i) => {
+                      const visibleCount = visibleWordCounts.current[p.title] ?? 0;
+                      const animate = expanded[p.title] && i >= visibleCount;
+                      return (
+                        <span
+                          key={i}
+                          className={animate ? "inline-block animate-blur-fade-up mr-1" : "inline-block mr-1"}
+                          style={animate ? { animationDelay: `${(i - visibleCount) * 35}ms` } : undefined}
+                        >
+                          {word}{" "}
+                        </span>
+                      );
+                    })}
                   </p>
                   {!expanded[p.title] && (
                     <button
                       type="button"
                       onClick={() => toggle(p.title)}
-                      className="absolute bottom-1 right-0 text-xs font-mono text-accent hover:underline bg-background pl-2 transition-colors"
+                      className="text-xs font-mono text-muted hover:text-foreground transition-colors duration-300 mt-1"
                     >
                       See more
                     </button>
@@ -74,7 +109,7 @@ export default function Projects() {
                   <button
                     type="button"
                     onClick={() => toggle(p.title)}
-                    className="text-xs font-mono text-accent hover:underline mb-4 transition-colors"
+                    className="text-xs font-mono text-muted hover:text-foreground mb-4 transition-colors duration-300"
                   >
                     See less
                   </button>
