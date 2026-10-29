@@ -31,7 +31,15 @@ export default function Hero() {
           {time ? `Open to new work · ${time} in Manila` : "Open to new work"}
         </p>
         <h1 className="text-3xl sm:text-4xl md:text-6xl font-medium leading-tight tracking-tight text-foreground">
-          Hi, I'm Jose!{" "}
+          {["Hi,", "I'm", "Jose!"].map((word, i) => (
+            <span
+              key={word}
+              className="inline-block animate-blur-fade-up mr-2"
+              style={{ animationDelay: `${i * 120}ms` }}
+            >
+              {word}
+            </span>
+          ))}{" "}
           <span
             className="inline-block"
             style={{

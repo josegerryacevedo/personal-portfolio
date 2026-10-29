@@ -69,9 +69,15 @@ export default function Projects() {
                 </h3>
                 <a
                   href={p.href}
-                  className="text-xs font-mono text-accent hover:underline"
+                  className="group/view inline-flex items-center gap-1.5 rounded-sm border border-border bg-transparent px-3 py-1.5 text-xs font-mono text-muted transition-[transform,opacity,color,border-color,background-color] duration-150 motion-reduce:transition-none hover:border-transparent hover:bg-white/5 hover:text-foreground active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
                 >
-                  View →
+                  View
+                  <span
+                    className="inline-block transition-transform duration-150 motion-reduce:transition-none group-hover/view:translate-x-[3px] group-hover/view:-translate-y-[3px]"
+                    aria-hidden="true"
+                  >
+                    ↗
+                  </span>
                 </a>
               </div>
               <div className="mb-4">
