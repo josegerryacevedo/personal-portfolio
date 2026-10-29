@@ -137,6 +137,17 @@ body {
 .section-divider {
   border-top: 1px solid var(--border);
 } 
+
+.mask-fade-bottom {
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, black 35%);
+  mask-image: linear-gradient(to top, transparent 0%, black 35%);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: bottom;
+  mask-position: bottom;
+}
  
 @keyframes fade-up-12 {
   from { opacity: 0; transform: translateY(12px); }

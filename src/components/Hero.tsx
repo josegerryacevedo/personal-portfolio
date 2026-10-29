@@ -69,7 +69,7 @@ return (
               initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.6, ease: "easeOut" }}
-              className="w-40 lg:w-full mb-6 lg:mb-0"
+              className="relative w-40 lg:w-full mb-6 lg:mb-0 mask-fade-bottom overflow-hidden"
             >
               <Image
                 src="/images/profile.png"
