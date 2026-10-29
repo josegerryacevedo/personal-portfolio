@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 
 const projects = [
   {
@@ -113,26 +114,31 @@ useEffect(() => {
                 </a>
               </div>
               <div className="mb-4">
-                  <p
-                    ref={(el) => { paraRefs.current[p.title] = el; }}
-                    className={`text-sm text-muted leading-relaxed transition-[max-height] duration-700 ease-in-out overflow-hidden ${
-                      expanded[p.title] ? "max-h-[6rem]" : "max-h-[calc(2*1.625*0.875rem)]"
-                    }`}
+                  <motion.div
+                    initial={false}
+                    animate={{ height: expanded[p.title] ? "auto" : "calc(2 * 1.625 * 0.875rem)" }}
+                    transition={{ duration: 0.7, ease: "easeInOut" }}
+                    style={{ overflow: "hidden" }}
                   >
-                    {p.description.split(" ").map((word, i) => {
-                      const visibleCount = visibleWordCounts.current[p.title] ?? 0;
-                      const animate = expanded[p.title] && i >= visibleCount;
-                      return (
-                        <span
-                          key={i}
-                          className={animate ? "inline-block animate-blur-fade-up mr-1" : "inline-block mr-1"}
-                          style={animate ? { animationDelay: `${(i - visibleCount) * 35}ms` } : undefined}
-                        >
-                          {word}{" "}
-                        </span>
-                      );
-                    })}
-                  </p>
+                    <p
+                      ref={(el) => { paraRefs.current[p.title] = el; }}
+                      className="text-sm text-muted leading-relaxed"
+                    >
+                      {p.description.split(" ").map((word, i) => {
+                        const visibleCount = visibleWordCounts.current[p.title] ?? 0;
+                        const animate = expanded[p.title] && i >= visibleCount;
+                        return (
+                          <span
+                            key={i}
+                            className={animate ? "inline-block animate-blur-fade-up mr-1" : "inline-block mr-1"}
+                            style={animate ? { animationDelay: `${(i - visibleCount) * 35}ms` } : undefined}
+                          >
+                            {word}{" "}
+                          </span>
+                        );
+                      })}
+                    </p>
+                  </motion.div>
                   {!expanded[p.title] && (
                     <button
                       type="button"
