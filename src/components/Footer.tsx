@@ -4,7 +4,7 @@ import { Reveal, RevealItem } from "@/components/reveal";
 
 export default function Footer() {
   return (
-    <footer id="contact" className="w-full py-6 mt-auto">
+    <footer className="w-full py-6 mt-auto">
       <Reveal className="mx-auto max-w-3xl flex flex-col sm:flex-row items-center justify-between gap-4 px-4 sm:px-6 md:px-8">
         <RevealItem>
           <div className="flex items-center gap-2">

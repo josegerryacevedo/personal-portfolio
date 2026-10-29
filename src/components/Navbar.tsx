@@ -6,16 +6,16 @@ import {
   FolderGit2,
   Briefcase,
   Wrench,
-  MessageCircle,
   Mail,
+  FileText,
 } from "lucide-react";
 
 const navItems = [
   { id: "projects", label: "Projects", icon: FolderGit2, href: "#projects" },
   { id: "experience", label: "Experience", icon: Briefcase, href: "#experience" },
   { id: "skills", label: "Skills", icon: Wrench, href: "#skills" },
-  { id: "contact", label: "Contact", icon: MessageCircle, href: "#contact" },
   { id: "email", label: "Email", icon: Mail, href: "mailto:josegerryacevedojr@gmail.com" },
+  { id: "resume", label: "Download resume", icon: FileText, href: "/resume.pdf" },
 ] as const;
 
 export default function Navbar() {
@@ -24,6 +24,7 @@ export default function Navbar() {
   const [focusedId, setFocusedId] = useState<string | null>(null);
   const [canHover, setCanHover] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [heroInView, setHeroInView] = useState(true);
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
@@ -46,16 +47,55 @@ export default function Navbar() {
           if (entry.isIntersecting) setActiveId(entry.target.id);
         });
       },
-      { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
+      { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
     );
     sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+    const hero = document.getElementById("hero");
+    let heroObserver: IntersectionObserver | null = null;
+    if (hero) {
+      heroObserver = new IntersectionObserver(([entry]) => {
+        setHeroInView(entry.isIntersecting);
+      }, { rootMargin: "-40% 0px -50% 0px", threshold: 0 });
+      heroObserver.observe(hero);
+    }
+    return () => {
+      observer.disconnect();
+      heroObserver?.disconnect();
+    };
+  }, []);
+  useEffect(() => {
+    const sections = navItems
+      .map((item) => document.getElementById(item.id))
+      .filter(Boolean) as HTMLElement[];
+    if (!sections.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveId(entry.target.id);
+        });
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
+    );
+    sections.forEach((s) => observer.observe(s));
+    const hero = document.getElementById("hero");
+    let heroObserver: IntersectionObserver | null = null;
+    if (hero) {
+      heroObserver = new IntersectionObserver(([entry]) => {
+        setHeroInView(entry.isIntersecting);
+      }, { rootMargin: "-40% 0px -50% 0px", threshold: 0 });
+      heroObserver.observe(hero);
+    }
+    return () => {
+      observer.disconnect();
+      heroObserver?.disconnect();
+    };
   }, []);
 
   const showTooltip = (id: string) => hoveredId === id || focusedId === id;
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
   };
 
   return (
@@ -64,13 +104,15 @@ export default function Navbar() {
       initial={prefersReducedMotion ? false : { opacity: 0, x: -12 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.4, delay: 0.6, ease: "easeOut" }}
-      className="fixed z-50 flex gap-2 p-2 rounded-full border border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70 md:flex-col md:left-4 md:top-1/2 md:-translate-y-1/2 md:bottom-auto bottom-4 left-1/2 -translate-x-1/2"
+      className="fixed z-50 flex gap-2 p-2 rounded-full border border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70 md:flex-col md:left-4 md:top-1/2 md:-translate-y-1/2 md:bottom-auto bottom-20 left-1/2 -translate-x-1/2"
     >
       <button
         type="button"
         aria-label="Top"
         onClick={scrollToTop}
-        className="flex h-10 w-10 items-center justify-center rounded-full font-mono text-xs font-medium text-muted transition-transform duration-150 motion-reduce:transition-none hover:scale-[1.08] active:scale-[0.95] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground hover:text-foreground"
+        className={`flex h-10 w-10 items-center justify-center rounded-full font-mono text-xs font-medium transition-transform duration-150 motion-reduce:transition-none hover:scale-[1.08] active:scale-[0.95] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
+            heroInView ? "bg-border-soft text-foreground" : "text-muted hover:text-foreground"
+          }`}
       >
         JA
       </button>
@@ -91,7 +133,8 @@ export default function Navbar() {
               onClick={() => {
                 if (item.href.startsWith("#")) {
                   const el = document.querySelector(item.href);
-                  el?.scrollIntoView({ behavior: "smooth" });
+                  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                  el?.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
                 } else {
                   window.location.href = item.href;
                 }

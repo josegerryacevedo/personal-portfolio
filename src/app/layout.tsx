@@ -18,7 +18,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-screen flex flex-col bg-background text-foreground">
         <Navbar />
-        <main className="flex-1 pb-20 md:pb-0">{children}</main>
+        <main className="flex-1 pb-[calc(var(--dock-height)+env(safe-area-inset-bottom)+24px)] md:pb-0">{children}</main>
         <Footer />
       </body>
     </html>

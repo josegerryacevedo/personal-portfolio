@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Reveal, RevealItem } from "@/components/reveal";
 import { BladeFlash } from "@/components/blade-flash";
+import SectionContainer from "@/components/section-container";
 import { motion } from "motion/react";
 
 const projects = [
@@ -58,13 +59,13 @@ export default function Projects() {
       id="projects"
       className="mx-auto max-w-3xl px-4 pt-8 pb-16 sm:px-6 sm:pt-10 sm:pb-20 md:px-8 scroll-mt-20"
     >
-      <Reveal className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12 pb-8 md:pb-12">
+      <Reveal className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8">
         <div className="md:sticky md:top-[calc(var(--nav-height,3.5rem)+1rem)] md:self-start">
           <RevealItem as="h2" className="text-xl sm:text-2xl font-medium tracking-tight text-foreground">
             <BladeFlash as="span" trigger="view">Projects</BladeFlash>
           </RevealItem>
         </div>
-        <div className="space-y-10">
+        <div className="space-y-6 md:space-y-10">
           {projects.map((p) => (
             <RevealItem key={p.title} as="article" className="group">
               <div className="flex flex-wrap items-baseline justify-between gap-2 mb-3">

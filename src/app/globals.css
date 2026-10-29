@@ -46,6 +46,7 @@ html {
   color-scheme: light dark;
   scroll-behavior: smooth;
   scroll-padding-top: var(--nav-height, 3.5rem);
+  scroll-snap-type: y proximity;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -184,3 +185,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .wave-jump { animation: none; }
 }
+
+section { scroll-snap-align: start; }
+
+:root { --dock-height: 52px; }

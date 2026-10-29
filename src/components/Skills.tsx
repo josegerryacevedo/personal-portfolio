@@ -1,4 +1,5 @@
 import { Reveal, RevealItem } from "@/components/reveal";
+import SectionContainer from "@/components/section-container";
 import { BladeFlash } from "@/components/blade-flash";
 
 const groups = [
@@ -51,8 +52,9 @@ const groups = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 scroll-mt-20">
-      <Reveal className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12 pb-8 md:pb-12">
+    <section className="min-h-0 lg:min-h-screen lg:min-h-dvh py-12 md:py-16 lg:py-24">
+      <SectionContainer id="skills" className="pb-8 md:pb-12 scroll-mt-12 md:scroll-mt-16">
+      <Reveal className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8">
         <div className="md:sticky md:top-[calc(var(--nav-height,3.5rem)+1rem)] md:self-start">
           <RevealItem as="h2" className="text-xl sm:text-2xl font-medium tracking-tight text-foreground">
             <BladeFlash as="span" trigger="view">Stacks</BladeFlash>
@@ -62,7 +64,7 @@ export default function Skills() {
           <Reveal className="flex flex-wrap gap-20" stagger={0.05}>
             {groups.map((g) => (
               <RevealItem key={g.label}>
-                <div className="min-w-[200px]">
+                <div>
                   <h4 className="text-base font-medium text-foreground mb-3">
                     {g.label}
                   </h4>
@@ -82,6 +84,7 @@ export default function Skills() {
           </Reveal>
         </div>
       </Reveal>
+      </SectionContainer>
     </section>
   );
 }

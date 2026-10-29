@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Reveal, RevealItem } from "@/components/reveal";
+import SectionContainer from "@/components/section-container";
 import ExperienceHeader from "@/components/ExperienceHeader";
 import { BladeFlash } from "@/components/blade-flash";
 
@@ -47,13 +48,13 @@ export default function Experience() {
      
       className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 scroll-mt-20"
     >
-      <Reveal className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12 pb-8 md:pb-12">
+      <Reveal className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8">
         <div className="md:sticky md:top-[calc(var(--nav-height,3.5rem)+1rem)] md:self-start">
           <RevealItem as="h2" className="text-xl sm:text-2xl font-medium tracking-tight text-foreground">
             <BladeFlash as="span" trigger="view">Experience</BladeFlash>
           </RevealItem>
         </div>
-        <div className="space-y-10">
+        <div className="space-y-6 md:space-y-10">
           <RevealItem>
             <div className="mb-16">
               <h3 className="text-base font-medium text-foreground mb-6">Work Experience</h3>

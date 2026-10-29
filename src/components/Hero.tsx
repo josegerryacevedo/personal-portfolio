@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import { SectionContainer } from "@/components/section-container";
 import { CYCLE, FLASH_END, JUMP_SPAN, START_DELAY } from "@/lib/hero-timing";
 import { BladeFlash } from "@/components/blade-flash";
 
@@ -57,14 +58,17 @@ useEffect(() => {
   }, [mounted]);
 return (
     <section
-      className="relative mx-auto flex w-full max-w-3xl flex-col justify-center gap-6 px-4 py-8 min-h-[calc(100dvh-var(--nav-height,3.5rem))] min-h-[calc(100svh-var(--nav-height,3.5rem))] sm:px-6 sm:py-10 md:px-8"
+      id="hero"
+      className="min-h-[100svh] md:min-h-dvh flex flex-col justify-center pt-16 md:pt-24 pb-[calc(var(--dock-height)+env(safe-area-inset-bottom)+16px+6vh)] md:pb-[calc(6rem+6vh)]"
     >
-      <motion.div
-        className="flex flex-col gap-6"
-        variants={containerVariants}
-        initial={prefersReducedMotion ? false : "hidden"}
-        animate="visible"
-      >
+<div className="flex-1 flex flex-col justify-center">
+        <SectionContainer className="flex flex-col gap-6">
+          <motion.div
+            className="flex flex-col gap-6"
+            variants={containerVariants}
+            initial={prefersReducedMotion ? false : "hidden"}
+            animate="visible"
+          >
         <motion.p
           custom={0}
           variants={itemVariants}
@@ -193,15 +197,12 @@ return (
           </motion.div>
         ))}
       </motion.div>
+      </SectionContainer>
+      </div>
 
-      <motion.hr
-        className="mt-4 border-t border-border"
-        initial={prefersReducedMotion ? false : { opacity: 0, scaleX: 0 }}
-        animate={{ opacity: 1, scaleX: 1 }}
-        transition={{ delay: 0.75, duration: 0.5, ease: "easeOut" }}
-        style={{ transformOrigin: "left" }}
-        aria-hidden="true"
-      />
+<SectionContainer>
+        <hr className="section-divider" />
+      </SectionContainer>
     </section>
   );
 }
