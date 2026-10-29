@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import Image from "next/image";
 import { SectionContainer } from "@/components/section-container";
 import { CYCLE, FLASH_END, JUMP_SPAN, START_DELAY } from "@/lib/hero-timing";
 import { BladeFlash } from "@/components/blade-flash";
@@ -63,12 +64,30 @@ return (
     >
 <div className="flex-1 flex flex-col justify-center">
         <SectionContainer className="flex flex-col gap-6">
-          <motion.div
-            className="flex flex-col gap-6"
-            variants={containerVariants}
-            initial={prefersReducedMotion ? false : "hidden"}
-            animate="visible"
-          >
+          <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-x-12 items-end">
+            <motion.div
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.6, ease: "easeOut" }}
+              className="w-40 lg:w-full mb-6 lg:mb-0"
+            >
+              <Image
+                src="/images/profile.png"
+                alt="Portrait of Jose Gerry Acevedo"
+                width={715}
+                height={715}
+                priority
+                sizes="(min-width: 1024px) 240px, 160px"
+                className="w-full h-auto grayscale contrast-125 mix-blend-multiply"
+              />
+            </motion.div>
+
+              <motion.div
+                className="flex flex-col gap-6"
+                variants={containerVariants}
+                initial={prefersReducedMotion ? false : "hidden"}
+                animate="visible"
+              >
         <motion.p
           custom={0}
           variants={itemVariants}
@@ -78,7 +97,7 @@ return (
           {time ? `Open to new work · ${time} in Manila` : "Open to new work"}
         </motion.p>
 
-        <motion.h1
+          <motion.h1
           custom={0.1}
           variants={itemVariants}
           className="text-3xl sm:text-4xl md:text-6xl font-medium leading-tight tracking-tight text-foreground"
@@ -133,6 +152,7 @@ return (
           </motion.span>
         </motion.h1>
 
+
         <motion.p
           custom={0.25}
           variants={itemVariants}
@@ -174,6 +194,7 @@ return (
           </a>
         </motion.div>
       </motion.div>
+        </div>
 
       <motion.div
         className="mt-4 grid grid-cols-1 sm:grid-cols-3 border border-border divide-y sm:divide-y-0 sm:divide-x divide-border"
