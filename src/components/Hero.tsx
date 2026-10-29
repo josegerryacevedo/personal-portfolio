@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import { BladeFlash } from "@/components/blade-flash";
 
 export default function Hero() {
   const [time, setTime] = useState<string | null>(null);
@@ -61,7 +62,9 @@ return (
           variants={itemVariants}
           className="text-3xl sm:text-4xl md:text-6xl font-medium leading-tight tracking-tight text-foreground"
         >
-          <span className="inline-block">Hi, I'm Jose!</span>{" "}
+          <BladeFlash as="span" trigger="load" delay={0.6} className="inline-block">
+            Hi, I'm Jose!
+          </BladeFlash>{" "}
           <span
             className="inline-block"
             style={{

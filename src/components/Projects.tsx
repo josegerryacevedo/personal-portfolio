@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Reveal, RevealItem } from "@/components/reveal";
+import { BladeFlash } from "@/components/blade-flash";
 import { motion } from "motion/react";
 
 const projects = [
   {
     title: "Eztrackph",
     status: "GPS fleet management platform",
-    href: "/projects/eztrackph",
+    href: "https://eztrackph.com/",
     description:
       "Contributed to the development and maintenance of a fleet management platform. Developed application features and integrated APIs to support fleet operations and data reporting. Worked on dashboards, reporting functionality, and data management improvements.",
     tech: ["PHP", "Laravel", "React", "TypeScript", "Inertia.js", "MySQL", "Tailwind CSS"],
@@ -57,10 +58,10 @@ export default function Projects() {
       id="projects"
       className="mx-auto max-w-3xl px-4 pt-8 pb-16 sm:px-6 sm:pt-10 sm:pb-20 md:px-8 scroll-mt-20"
     >
-      <Reveal className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12">
+      <Reveal className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-12 pb-8 md:pb-12">
         <div className="md:sticky md:top-[calc(var(--nav-height,3.5rem)+1rem)] md:self-start">
           <RevealItem as="h2" className="text-xl sm:text-2xl font-medium tracking-tight text-foreground">
-            Projects
+            <BladeFlash as="span" trigger="view">Projects</BladeFlash>
           </RevealItem>
         </div>
         <div className="space-y-10">
@@ -72,6 +73,8 @@ export default function Projects() {
                 </h3>
                 <a
                   href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group/view inline-flex items-center gap-1.5 rounded-sm border border-border bg-transparent px-3 py-1.5 text-xs font-mono text-muted transition-[transform,opacity,color,border-color,background-color] duration-150 motion-reduce:transition-none hover:border-transparent hover:bg-white/5 hover:text-foreground active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
                 >
                   View
@@ -146,7 +149,7 @@ export default function Projects() {
         </div>
 </Reveal>
       <RevealItem>
-        <hr className="section-divider mt-16" />
+        <hr className="section-divider" />
       </RevealItem>
     </section>
   );
