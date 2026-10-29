@@ -64,7 +64,7 @@ export default function Experience() {
                   <span className="text-xs text-muted ml-auto">{w.date}</span>
                 </div>
                 <p className="text-xs text-muted mb-3">{w.location}</p>
-                <ul className="list-disc list-inside text-sm text-foreground leading-relaxed space-y-2">
+                <ul className="list-disc list-inside text-sm text-muted leading-relaxed space-y-2">
                   {w.bullets.map((b) => (
                     <li key={b}>{b}</li>
                   ))}
@@ -85,7 +85,7 @@ export default function Experience() {
                   <span className="text-sm text-muted">{t.location}</span>
                   <span className="text-xs text-muted ml-auto">{t.date}</span>
                 </div>
-                <ul className="list-disc list-inside text-sm text-foreground leading-relaxed space-y-2">
+                <ul className="list-disc list-inside text-sm text-muted leading-relaxed space-y-2">
                   {t.bullets.map((b) => (
                     <li key={b}>{b}</li>
                   ))}
