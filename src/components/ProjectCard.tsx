@@ -32,13 +32,13 @@ export default function ProjectCard({
             ></div>
           </div>
           <div
-            className="absolute inset-0 bg-transparent transition-colors duration-300 ease-in-out group-hover:bg-overlay-light"
+            className="absolute inset-0 bg-transparent transition-colors duration-300 ease-in-out group-hover:bg-foreground/10 dark:group-hover:bg-foreground/20"
           ></div>
         </div>
         <div className="!text-[14px] !m-0 flex items-center gap-1.5">
-          <p className="text-ink-100!">{title}</p>
-          <p className="text-ink-25!"> / </p>
-          <p className="text-ink-45">{status}</p>
+          <p className="text-foreground">{title}</p>
+          <p className="text-muted-light"> / </p>
+          <p className="text-muted">{status}</p>
         </div>
       </div>
     </a>

@@ -93,7 +93,7 @@ export default function Hero() {
                 variants={itemVariants}
                 className="text-xs font-mono uppercase tracking-widest text-muted flex items-center gap-2"
               >
-                <span className="inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
+                <span className="inline-block h-2 w-2 rounded-full bg-[var(--present-dot)] animate-pulse" aria-hidden="true" />
                 {time ? `Open to new work · ${time} in Manila` : "Open to new work"}
               </motion.p>
 

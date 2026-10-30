@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #0f0f0f;
@@ -12,21 +14,29 @@
   --accent: #2563eb;
   --accent-hover: #1d4ed8;
 
+  --chip-bg: #f1f5f9;
+  --card: #ffffff;
+  --present-dot: #22c55e;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 .dark {
-  --background: #090909;
-  --foreground: #fafafa;
+  --background: #0b0b0c;
+  --foreground: #ededed;
 
-  --muted: #a1a1aa;
-  --muted-light: #d4d4d4;
-  --border: #27272a;
+  --muted: #8a8a8f;
+  --muted-light: #a1a1aa;
+  --border: #26262a;
   --border-soft: #18181b;
 
   --accent: #3b82f6;
   --accent-hover: #60a5fa;
+
+  --chip-bg: #18181b;
+  --card: #18181b;
+  --present-dot: #4ade80;
 }
 
 @theme inline {
@@ -37,10 +47,175 @@
   --color-border: var(--border);
   --color-border-soft: var(--border-soft);
   --color-accent: var(--accent);
+  --color-chip-bg: var(--chip-bg);
+  --color-card: var(--card);
+  --color-present-dot: var(--present-dot);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
 }
+
+html {
+  color-scheme: light dark;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height, 3.5rem);
+  scroll-snap-type: y proximity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+::selection {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* reduced motion disabled for animations */
+
+
+@keyframes blur-fade-up {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.animate-blur-fade-up {
+  animation: blur-fade-up 0.6s ease-out both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+
+@keyframes pop-in {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-pop-in {
+  display: inline-block;
+  animation: pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transform-origin: center;
+}
+
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(14deg); }
+  50% { transform: rotate(-8deg); }
+  75% { transform: rotate(14deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.section-divider {
+  border-top: 1px solid var(--border);
+}
+
+@keyframes fade-up-12 {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up-12 {
+  animation: fade-up-12 0.5s ease-out both;
+}
+
+@keyframes draw-line {
+  from { opacity: 0; transform: scaleX(0); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+.animate-draw-line {
+  animation: draw-line 0.5s ease-out both;
+}
+
+@keyframes jump {
+  0%, 80%, 100% { transform: translateY(0); }
+  90% { transform: translateY(-10px); }
+}
+
+@keyframes wave-jump {
+  0%, 94% { transform: translateY(0); }
+  95% { transform: translateY(-24px); }
+  97% { transform: translateY(0); }
+  98% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+.wave-jump {
+  display: inline-block;
+  transform-origin: bottom center;
+  --cycle: 4s;
+  animation: wave-jump var(--cycle) cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+  animation-delay: 1.2s;
+  animation-play-state: running;
+}
+
+.wave-jump.paused {
+  animation-play-state: paused;
+}
+
+.theme-icon-swap {
+  animation: theme-icon-swap 0.2s ease-out both;
+}
+
+@keyframes theme-icon-swap {
+  0% {
+    opacity: 0;
+    transform: rotate(180deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave-jump { animation: none; }
+}
+
+section { scroll-snap-align: start; }
+
+:root { --dock-height: 52px; }
 
 html {
   color-scheme: light dark;

@@ -2,12 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { useTheme } from "@/components/theme-provider";
 import {
   FolderGit2,
   Briefcase,
   Wrench,
   Mail,
   FileText,
+  Sun,
+  Moon,
 } from "lucide-react";
 
 const navItems = [
@@ -26,6 +29,9 @@ export default function Navbar() {
   const [isDesktop, setIsDesktop] = useState(false);
   const [heroInView, setHeroInView] = useState(true);
   const prefersReducedMotion = useReducedMotion();
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === "dark";
+  const [themeTooltipVisible, setThemeTooltipVisible] = useState(false);
 
   useEffect(() => {
     setCanHover(window.matchMedia("(hover: hover)").matches);
@@ -36,33 +42,6 @@ export default function Navbar() {
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  useEffect(() => {
-    const sections = navItems
-      .map((item) => document.getElementById(item.id))
-      .filter(Boolean) as HTMLElement[];
-    if (!sections.length) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveId(entry.target.id);
-        });
-      },
-      { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
-    );
-    sections.forEach((s) => observer.observe(s));
-    const hero = document.getElementById("hero");
-    let heroObserver: IntersectionObserver | null = null;
-    if (hero) {
-      heroObserver = new IntersectionObserver(([entry]) => {
-        setHeroInView(entry.isIntersecting);
-      }, { rootMargin: "-40% 0px -50% 0px", threshold: 0 });
-      heroObserver.observe(hero);
-    }
-    return () => {
-      observer.disconnect();
-      heroObserver?.disconnect();
-    };
-  }, []);
   useEffect(() => {
     const sections = navItems
       .map((item) => document.getElementById(item.id))
@@ -170,7 +149,7 @@ export default function Navbar() {
                       : { opacity: 0, y: 6 }
                   }
                   transition={{ duration: 0.15, ease: "easeOut" }}
-                  className={`pointer-events-none absolute z-50 whitespace-nowrap rounded-md border border-border bg-white px-2 py-1 text-[12px] font-mono text-foreground shadow-sm ${
+                  className={`pointer-events-none absolute z-50 whitespace-nowrap rounded-md border border-border bg-background px-2 py-1 text-[12px] font-mono text-foreground shadow-sm ${
                     isDesktop
                       ? "left-full top-1/2 -translate-y-1/2 ml-2"
                       : "bottom-full left-1/2 -translate-x-1/2 mb-2"
@@ -183,7 +162,37 @@ export default function Navbar() {
           </div>
         );
       })}
+      <div className="relative">
+        <button
+          type="button"
+          aria-label="Toggle theme"
+          onMouseEnter={() => setThemeTooltipVisible(true)}
+          onMouseLeave={() => setThemeTooltipVisible(false)}
+          onClick={() => setTheme(isDark ? "light" : "dark")}
+          className="flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-150 motion-reduce:transition-none hover:scale-[1.08] active:scale-[0.95] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+        >
+          <span
+            key={isDark ? "moon" : "sun"}
+            className={prefersReducedMotion ? "" : "theme-icon-swap"}
+          >
+            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+          </span>
+        </button>
+        <AnimatePresence>
+          {themeTooltipVisible && (
+            <motion.div
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: 6 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 6 }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
+              className={`pointer-events-none absolute z-50 whitespace-nowrap rounded-md border border-border bg-background px-2 py-1 text-[12px] font-mono text-foreground shadow-sm ${isDesktop ? "left-full top-1/2 -translate-y-1/2 ml-2" : "bottom-full left-1/2 -translate-x-1/2 mb-2"}`}
+            >
+              {isDark ? "Light mode" : "Dark mode"}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </motion.nav>
   );
 }
-
+

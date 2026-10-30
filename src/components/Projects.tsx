@@ -76,7 +76,7 @@ export default function Projects() {
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/view inline-flex items-center gap-1.5 rounded-sm border border-border bg-transparent px-3 py-1.5 text-xs font-mono text-muted transition-[transform,opacity,color,border-color,background-color] duration-150 motion-reduce:transition-none hover:border-transparent hover:bg-white/5 hover:text-foreground active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+                  className="group/view inline-flex items-center gap-1.5 rounded-sm border border-border bg-transparent px-3 py-1.5 text-xs font-mono text-muted transition-[transform,opacity,color,border-color,background-color] duration-150 motion-reduce:transition-none hover:border-transparent hover:bg-foreground/10 dark:hover:bg-foreground/20 hover:text-foreground active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
                 >
                   View
                   <span

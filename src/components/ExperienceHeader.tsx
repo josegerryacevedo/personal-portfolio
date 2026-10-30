@@ -33,7 +33,7 @@ export default function ExperienceHeader({
         {isPresent ? (
           <>
             <span
-              className="inline-block h-1.5 w-1.5 rounded-full bg-green-500 align-middle"
+              className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--present-dot)] align-middle"
               aria-hidden="true"
             />{" "}
             Present

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Reveal, RevealItem } from "@/components/reveal";
 
@@ -8,8 +8,8 @@ export default function Footer() {
       <Reveal className="mx-auto max-w-3xl flex flex-col sm:flex-row items-center justify-between gap-4 px-4 sm:px-6 md:px-8">
         <RevealItem>
           <div className="flex items-center gap-2">
-            <div className="bg-primary w-1 h-1"></div>
-            <p className="!text-ink-40 !m-0 shrink-0 tabular-nums" aria-live="polite">
+            <div className="bg-accent w-1 h-1"></div>
+            <p className="text-muted !m-0 shrink-0 tabular-nums" aria-live="polite">
                
             </p>
           </div>
@@ -20,14 +20,14 @@ export default function Footer() {
               href="https://www.linkedin.com/in/your-username"
               target="_blank"
               rel="noopener noreferrer"
-              className="tap-target text-[15px] text-ink-40 hover:text-primary transition-colors"
+              className="tap-target text-[15px] text-muted hover:text-accent transition-colors"
             >
               LinkedIn
             </a>
             <button
               type="button"
               data-cursor="email"
-              className="tap-target text-[15px] text-ink-40 hover:text-primary transition-colors"
+              className="tap-target text-[15px] text-muted hover:text-accent transition-colors"
             >
               Email
             </button>
@@ -35,7 +35,7 @@ export default function Footer() {
               href="https://x.com/your-username"
               target="_blank"
               rel="noopener noreferrer"
-              className="tap-target text-[15px] text-ink-40 hover:text-primary transition-colors"
+              className="tap-target text-[15px] text-muted hover:text-accent transition-colors"
             >
               X
             </a>
@@ -43,7 +43,7 @@ export default function Footer() {
               href="https://www.instagram.com/your-username/"
               target="_blank"
               rel="noopener noreferrer"
-              className="tap-target text-[15px] text-ink-40 hover:text-primary transition-colors"
+              className="tap-target text-[15px] text-muted hover:text-accent transition-colors"
             >
               Instagram
             </a>
@@ -51,7 +51,7 @@ export default function Footer() {
               href="https://devpost.com/your-username"
               target="_blank"
               rel="noopener noreferrer"
-              className="tap-target text-[15px] text-ink-40 hover:text-primary transition-colors"
+              className="tap-target text-[15px] text-muted hover:text-accent transition-colors"
             >
               Devpost
             </a>
