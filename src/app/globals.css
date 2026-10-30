@@ -146,9 +146,6 @@ body {
   100% { transform: rotate(0deg); }
 }
 
-.section-divider {
-  border-top: 1px solid var(--border);
-}
 
 @keyframes fade-up-12 {
   from { opacity: 0; transform: translateY(12px); }
@@ -309,9 +306,6 @@ body {
   100% { transform: rotate(0deg); }
 }
  
-.section-divider {
-  border-top: 1px solid var(--border);
-} 
 
 @keyframes fade-up-12 {
   from { opacity: 0; transform: translateY(12px); }

@@ -127,9 +127,6 @@ export default function Experience() {
           </RevealItem>
         </div>
       </Reveal>
-      <RevealItem>
-        <hr className="section-divider" />
-      </RevealItem>
     </section>
   );
 }

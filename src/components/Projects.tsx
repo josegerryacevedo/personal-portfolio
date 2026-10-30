@@ -149,9 +149,6 @@ export default function Projects() {
           ))}
         </div>
 </Reveal>
-      <RevealItem>
-        <hr className="section-divider" />
-      </RevealItem>
     </section>
   );
 }

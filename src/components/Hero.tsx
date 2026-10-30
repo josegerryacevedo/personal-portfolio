@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { SectionContainer } from "@/components/section-container";
+import { useTheme } from "@/components/theme-provider";
 import { CYCLE, FLASH_END, JUMP_SPAN, START_DELAY } from "@/lib/hero-timing";
 import { BladeFlash } from "@/components/blade-flash";
 
@@ -12,6 +13,8 @@ export default function Hero() {
   const [mounted, setMounted] = useState(false);
   const [paused, setPaused] = useState(false);
   const emojiRef = useRef<HTMLSpanElement>(null);
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const prefersReducedMotion = useReducedMotion();
 
   const containerVariants = {
@@ -72,7 +75,7 @@ export default function Hero() {
               className="relative w-full max-w-24 lg:w-[160px] lg:max-w-none mb-6 lg:mb-0 mx-auto lg:mx-0"
             >
               <Image
-                src="/images/black-profile.png"
+                src={isDark ? "/images/white-profile.png" : "/images/black-profile.png"}
                 alt="Portrait of Jose Gerry Acevedo"
                 width={500}
                 height={500}
@@ -197,7 +200,7 @@ export default function Hero() {
           </div>
 
           <motion.div
-            className="mt-4 grid grid-cols-1 sm:grid-cols-3 border border-border divide-y sm:divide-y-0 sm:divide-x divide-border"
+            className="mt-8 grid grid-cols-1 sm:grid-cols-3 border border-border divide-y sm:divide-y-0 sm:divide-x divide-border"
             variants={containerVariants}
             initial={prefersReducedMotion ? false : "hidden"}
             animate="visible"
@@ -221,9 +224,6 @@ export default function Hero() {
         </SectionContainer>
       </div>
 
-      <SectionContainer>
-        <hr className="section-divider" />
-      </SectionContainer>
     </section>
   );
 }
