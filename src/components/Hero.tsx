@@ -16,6 +16,51 @@ export default function Hero() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const prefersReducedMotion = useReducedMotion();
+  const [yearsCount, setYearsCount] = useState(prefersReducedMotion ? 3 : 0);
+  const [hasCounted, setHasCounted] = useState(prefersReducedMotion);
+  const cell1Ref = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number | null>(null);
+
+  // Count-up animation for "3+" when cell 1 comes into view
+  useEffect(() => {
+    if (prefersReducedMotion || hasCounted) return;
+    const el = cell1Ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        let start: number | null = null;
+        const end = 3;
+        const duration = 800;
+
+        const frame = (time: number) => {
+          if (!start) start = time;
+          const elapsed = time - start;
+          const progress = Math.min(elapsed / duration, 1);
+          setYearsCount(Math.floor(progress * end));
+          if (progress < 1) {
+            rafRef.current = requestAnimationFrame(frame);
+          } else {
+            setYearsCount(end);
+            setHasCounted(true);
+          }
+        };
+
+        rafRef.current = requestAnimationFrame(frame);
+        observer.disconnect();
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, [prefersReducedMotion, hasCounted]);
 
   const containerVariants = {
     hidden: {},
@@ -199,25 +244,80 @@ export default function Hero() {
             </motion.div>
           </div>
 
+          {/* Info grid */}
           <motion.div
-            className="mt-8 grid grid-cols-1 sm:grid-cols-3 border border-border divide-y sm:divide-y-0 sm:divide-x divide-border"
+            className="mt-16 relative grid grid-cols-1 lg:grid-cols-3"
             variants={containerVariants}
             initial={prefersReducedMotion ? false : "hidden"}
             animate="visible"
           >
+            {/* Corner ticks */}
+            <span
+              className="absolute left-0 top-0 w-[6px] h-[6px] border-t border-l border-border"
+              aria-hidden="true"
+            />
+            <span
+              className="absolute right-0 top-0 w-[6px] h-[6px] border-t border-r border-border"
+              aria-hidden="true"
+            />
+            <span
+              className="absolute left-0 bottom-0 w-[6px] h-[6px] border-b border-l border-border"
+              aria-hidden="true"
+            />
+            <span
+              className="absolute right-0 bottom-0 w-[6px] h-[6px] border-b border-r border-border"
+              aria-hidden="true"
+            />
+
             {[
-              { title: "3+ years", subtitle: "building software" },
-              { title: "Web & Mobile", subtitle: "front to back" },
-              { title: "Philippines", subtitle: "working remotely or on-site" },
+              {
+                value: yearsCount,
+                valueSuffix: "+",
+                valueSmall: "yrs",
+                label: "Software Development",
+              },
+              {
+                value: "Web & Mobile",
+                valueSmall: null,
+                label: "Front & Back-End",
+              },
+              {
+                value: "Philippines",
+                valueSmall: null,
+                label: "Remote · On-site",
+              },
             ].map((cell, i) => (
               <motion.div
-                key={cell.title}
+                key={cell.label}
+                ref={i === 0 ? cell1Ref : undefined}
                 custom={0.45 + i * 0.08}
                 variants={itemVariants}
-                className="bg-background p-6"
+                className={`
+                  relative p-5 lg:p-6 min-h-[64px] lg:min-h-auto
+                  flex lg:flex-col items-center lg:items-start justify-between lg:justify-start lg:gap-y-3
+                  border-b lg:border-b-0 lg:border-r border-border lg:last:border-r-0 last:border-b-0
+                  hover:bg-chip-bg transition-colors duration-300 group
+                `}
               >
-                <span className="block font-medium text-foreground">{cell.title}</span>
-                <span className="text-muted text-sm">{cell.subtitle}</span>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-[18px] font-medium tracking-tight text-foreground">
+                    {cell.value}{cell.valueSuffix}
+                  </span>
+                  {cell.valueSmall && (
+                    <span className="text-[14px] text-muted">
+                      {cell.valueSmall}
+                    </span>
+                  )}
+                </div>
+
+                {/* Hover accent line across the top */}
+                <span
+                  className="absolute left-0 top-0 w-full h-px bg-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                />
+
+                <span className="mt-2 lg:mt-0 flex items-center gap-1.5 text-[10px] font-mono text-muted tracking-tight whitespace-nowrap shrink-0">
+                  {cell.label}
+                </span>
               </motion.div>
             ))}
           </motion.div>
