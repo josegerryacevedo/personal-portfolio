@@ -32,7 +32,6 @@ export function BladeFlash({
 
   const style = {
     "--flash-base": "var(--foreground)",
-    "--flash-color": "#9fd8ff",
     backgroundImage:
       "linear-gradient(110deg, var(--flash-base) 40%, var(--flash-color) 50%, var(--flash-base) 60%)",
     backgroundSize: "250% 100%",
