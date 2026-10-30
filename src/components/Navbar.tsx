@@ -83,7 +83,7 @@ export default function Navbar() {
       initial={prefersReducedMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4, delay: 0.6, ease: "easeOut" }}
-      className="fixed z-50 flex gap-2 p-2 rounded-full border border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70 overflow-visible md:flex-col md:left-[16px] md:top-1/2 md:-translate-y-1/2 md:bottom-auto bottom-20 left-1/2 -translate-x-1/2"
+      className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex gap-2 p-2 rounded-full border border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70 overflow-visible md:flex-col md:left-4 md:top-1/2 md:-translate-y-1/2 md:bottom-auto md:translate-x-0"
     >
       <button
         type="button"
@@ -96,12 +96,12 @@ export default function Navbar() {
         JA
       </button>
       <span className="mx-auto h-px w-6 bg-border md:mx-0 md:h-6 md:w-px" aria-hidden="true" />
-      {navItems.filter((item) => !(isDesktop && item.id === "resume")).map((item) => {
+      {navItems.map((item) => {
         const Icon = item.icon;
         const active = activeId === item.id;
         const tooltipVisible = showTooltip(item.id);
         return (
-          <div key={item.id} className="relative">
+          <div key={item.id} className="relative group">
             <button
               type="button"
               aria-label={item.label}
@@ -151,8 +151,8 @@ export default function Navbar() {
                   transition={{ duration: 0.15, ease: "easeOut" }}
                   className={`pointer-events-none absolute z-50 whitespace-nowrap rounded-md border border-border bg-background px-2 py-1 text-[12px] font-mono text-foreground shadow-sm ${
                     isDesktop
-                      ? "left-full top-1/2 -translate-y-1/2 ml-2"
-                      : "bottom-full left-1/2 -translate-x-1/2 mb-2"
+                      ? "absolute left-full top-1/2 -translate-y-1/2 ml-3"
+                      : "absolute bottom-full left-0 mb-2"
                   }`}
                 >
                   {item.label}
@@ -185,7 +185,7 @@ export default function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 6 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className={`pointer-events-none absolute z-50 whitespace-nowrap rounded-md border border-border bg-background px-2 py-1 text-[12px] font-mono text-foreground shadow-sm ${isDesktop ? "left-full top-1/2 -translate-y-1/2 ml-2" : "bottom-full left-1/2 -translate-x-1/2 mb-2"}`}
+              className={`pointer-events-none absolute z-50 whitespace-nowrap rounded-md border border-border bg-background px-2 py-1 text-[12px] font-mono text-foreground shadow-sm ${isDesktop ? "absolute left-full top-1/2 -translate-y-1/2 ml-3" : "bottom-full left-1/2 -translate-x-1/2 mb-2"}`}
             >
               {isDark ? "Light mode" : "Dark mode"}
             </motion.div>

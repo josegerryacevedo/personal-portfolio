@@ -22,7 +22,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-screen flex flex-col bg-background text-foreground">
         <ThemeProvider>
           <Navbar />
-          <main className="flex-1 pb-[calc(var(--dock-height)+env(safe-area-inset-bottom)+24px)] md:pb-0">
+          <main className="flex-1 pb-[calc(var(--dock-height)+env(safe-area-inset-bottom)+24px)] md:pb-0 md:pl-24">
             {children}
           </main>
           <Footer />
