@@ -233,12 +233,12 @@ export default function Hero() {
                 </a>
                 <span>/</span>
                 <a
-                  href="https://x.com/josegerryacevedo"
+                  href="mailto:josegerryacevedojr@gmail.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="relative transition-colors hover:text-foreground after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:scale-x-0 after:bg-foreground after:transition-transform after:duration-200 after:origin-left hover:after:scale-x-100"
                 >
-                  x
+                  email
                 </a>
               </motion.div>
             </motion.div>
@@ -246,7 +246,7 @@ export default function Hero() {
 
           {/* Info grid */}
           <motion.div
-            className="mt-16 relative grid grid-cols-1 lg:grid-cols-3"
+            className="mt-8 lg:mt-10 relative grid grid-cols-1 lg:grid-cols-3"
             variants={containerVariants}
             initial={prefersReducedMotion ? false : "hidden"}
             animate="visible"
@@ -296,7 +296,6 @@ export default function Hero() {
                   relative p-5 lg:p-6 min-h-[64px] lg:min-h-auto
                   flex lg:flex-col items-center lg:items-start justify-between lg:justify-start lg:gap-y-3
                   border-b lg:border-b-0 lg:border-r border-border lg:last:border-r-0 last:border-b-0
-                  hover:bg-chip-bg transition-colors duration-300 group
                 `}
               >
                 <div className="flex items-baseline gap-1">
@@ -310,12 +309,7 @@ export default function Hero() {
                   )}
                 </div>
 
-                {/* Hover accent line across the top */}
-                <span
-                  className="absolute left-0 top-0 w-full h-px bg-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
-                />
-
-                <span className="mt-2 lg:mt-0 flex items-center gap-1.5 text-[10px] font-mono text-muted tracking-tight whitespace-nowrap shrink-0">
+                <span className="mt-2 lg:mt-0 flex items-center gap-1.5 text-[12px] font-mono text-muted tracking-tight whitespace-nowrap shrink-0">
                   {cell.label}
                 </span>
               </motion.div>

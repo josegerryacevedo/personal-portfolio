@@ -80,10 +80,10 @@ export default function Navbar() {
   return (
     <motion.nav
       aria-label="Primary"
-      initial={prefersReducedMotion ? false : { opacity: 0, x: -12 }}
-      animate={{ opacity: 1, x: 0 }}
+      initial={prefersReducedMotion ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.4, delay: 0.6, ease: "easeOut" }}
-      className="fixed z-50 flex gap-2 p-2 rounded-full border border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70 md:flex-col md:left-4 md:top-1/2 md:-translate-y-1/2 md:bottom-auto bottom-20 left-1/2 -translate-x-1/2"
+      className="fixed z-50 flex gap-2 p-2 rounded-full border border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70 overflow-visible md:flex-col md:left-[16px] md:top-1/2 md:-translate-y-1/2 md:bottom-auto bottom-20 left-1/2 -translate-x-1/2"
     >
       <button
         type="button"
@@ -96,7 +96,7 @@ export default function Navbar() {
         JA
       </button>
       <span className="mx-auto h-px w-6 bg-border md:mx-0 md:h-6 md:w-px" aria-hidden="true" />
-      {navItems.map((item) => {
+      {navItems.filter((item) => !(isDesktop && item.id === "resume")).map((item) => {
         const Icon = item.icon;
         const active = activeId === item.id;
         const tooltipVisible = showTooltip(item.id);
