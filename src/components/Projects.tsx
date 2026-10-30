@@ -76,11 +76,11 @@ export default function Projects() {
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/view inline-flex items-center gap-1.5 rounded-sm border border-border bg-transparent px-3 py-1.5 text-xs font-mono text-muted transition-[transform,opacity,color,border-color,background-color] duration-150 motion-reduce:transition-none hover:border-transparent hover:bg-foreground/10 dark:hover:bg-foreground/20 hover:text-foreground active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+                  className="relative inline-flex items-center gap-1.5 text-[12px] text-muted transition-colors hover:text-foreground after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:scale-x-0 after:bg-foreground after:transition-transform after:duration-200 after:origin-left hover:after:scale-x-100"
                 >
                   View
                   <span
-                    className="inline-block transition-transform duration-150 motion-reduce:transition-none group-hover/view:translate-x-[3px] group-hover/view:-translate-y-[3px]"
+                    className="inline-block"
                     aria-hidden="true"
                   >
                     ↗
